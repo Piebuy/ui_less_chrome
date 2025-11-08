@@ -1,6 +1,7 @@
 from util import *
+import sys
 
-def main():
+def main(args=[]):
     settings = load_settings()
     chrome_path = settings.get('chrome_path','')
     url = settings.get('default_website','')
@@ -17,7 +18,11 @@ def main():
         print("Paste website and press enter or write nothing to use default website.")
         print("Type 'dw' to set default website, 'cp' to set chrome.exe path, 'l' to list saved URLs")
         print("argument '--a' to add URL to saved URLs when opening, --i for incognito mode\n")
-        url_arguments = input("\nPaste website here: ").split()
+        print("--url [website] [arguments] can also be used to pass URL and arguments directly from command line.\n")
+        print("    use any exsistant or non existant argument to use default website directly.\n")
+
+        url_arguments = check_args(args)
+        
         url = url_arguments[0] if len(url_arguments) > 0 else ""
         arguments = url_arguments[1:] if len(url_arguments) > 1 else []
 
@@ -83,5 +88,10 @@ def main():
             input("\nPress Enter to continue...")
 
 if __name__ == "__main__":
-    check_settings_exist()
-    main()
+    if sys.argv[1:]:
+        args = sys.argv[1:]
+        print(args)
+        main(args)
+    else:
+        check_settings_exist()
+        main()

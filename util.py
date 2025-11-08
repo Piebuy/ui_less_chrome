@@ -61,3 +61,20 @@ def add_www_https(url):
 def is_valid_chrome_path(path):
     """Check if the given path points to a valid chrome.exe file."""
     return os.path.isfile(path) and os.path.basename(path).lower() == "chrome.exe"
+def check_args(args):
+    
+    if len(args) == 0:
+        url_arguments = input("\nPaste website here: ").split()
+    else:
+        url_arguments = [arg for arg in args]
+        if '--url' in args:
+            for i, arg in enumerate(args):
+                if arg == '--url':
+                    url_arguments.insert(0, args[i+1])
+                    url_arguments.pop(i+2)
+                    url_arguments.pop(i+1)
+                    break
+        else:
+            url_arguments.insert(0, '')
+    
+    return url_arguments
