@@ -54,6 +54,7 @@ def load_list_of_urls(filename):
     return urls
 
 def add_www_https(url):
+    url = url.replace('http://', '').replace('https://', '').replace('www.', '')
     url = 'www.' + url if not "www." in url else url
     url = 'https://' + url if not "https://" in url else url
     return url

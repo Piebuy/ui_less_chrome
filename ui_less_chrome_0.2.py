@@ -17,8 +17,8 @@ def main(args=[]):
         print(f"-- Opens Chrome UI less --      Default Website: {default_website}      Chrome Path Set: {c_path_set}\n")
         print("Paste website and press enter or write nothing to use default website.")
         print("Type 'dw' to set default website, 'cp' to set chrome.exe path, 'l' to list saved URLs")
-        print("argument '--a' to add URL to saved URLs when opening, --i for incognito mode\n")
-        print("--url [website] [arguments] can also be used to pass URL and arguments directly from command line.\n")
+        print("argument '--a' to add URL to saved URLs when opening, --i for incognito mode")
+        print("use --url [website] [arguments] can also be used to pass URL and arguments directly from command line.")
         print("    use any exsistant or non existant argument to use default website directly.\n")
 
         url_arguments = check_args(args)
@@ -75,11 +75,14 @@ def main(args=[]):
                 save_list_of_urls(saved_urls, SAVED_URLS_FILENAME)
 
         try:
+            clear_screen()
             if '--i' in arguments: # type: ignore
                 url = url.replace(' --i','').replace('--i','') # type: ignore
                 subprocess.Popen([chrome_path, "--incognito", f"--app={url}"]) # type: ignore
+                print(f"\nOpening {url} in Chrome in incognito mode...")
             else:
                 subprocess.Popen([chrome_path, f"--app={url}"]) # type: ignore
+                print(f"\nOpening {url} in Chrome...")
             break
 
         except Exception as e:
