@@ -1,4 +1,4 @@
 @echo off
 REM Run script.py with arguments
-python "C:\Users\Tomas\Documents\VS Code Projects 2\ui_less_chrome\ui_less_chrome_0.2.py" --i --url google.com 
+python "C:\Users\Tomas\Documents\VS Code Projects 2\ui_less_chrome\main.py" --i --url google.com 
 
